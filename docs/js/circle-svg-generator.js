@@ -1,0 +1,175 @@
+class CircleSvgGenerator {
+    constructor() {
+        this.userIconSizes = [96,80,64,48,32,24,20,16,12] // 差16,8,4
+        //this.userIconSizes = [96,80,64,48,32,24,16,12] // 差16,8,4
+        this.width = 96 + 80*2 + 64*2 + 48*2 + 32*2 + 24*2 + 16*2 + 12*2
+        this.height = this.width
+    }
+    generate() { // 中央ユーザの表示サイズ、周辺ユーザの表示数＆表示サイズ
+        return this.#makeSvg(this.#makeCss()+this.#makeBackground()+this.#makeUsers())
+    }
+    #makeSvg(content) { return `<svg width="${this.width}" height="${this.height}">${content}</svg>` }
+    #makeCss() { return `<defs><style type="text/css"><![CDATA[
+  image { clip-path: circle(96px at center); }
+]]></style></defs>` }
+    #makeBackground() { return `<rect x="0" y="0" width="${this.width}" height="${this.height}" style="fill:green" />` }
+    #makeUsers() {
+        const imgs = []
+        imgs.push(this.#makeCenter())
+        imgs.push(this.#makeOuter1())
+        imgs.push(this.#makeOuter2())
+        imgs.push(this.#makeOuter3())
+        imgs.push(this.#makeOuter4())
+        imgs.push(this.#makeOuter5())
+        imgs.push(this.#makeOuter6())
+        return imgs.join('')
+    }
+    #makeUser(site, src, size, x, y) { return `<a href="${site}"><image href="${src}" width="${size}" height="${size}" x="${x}" y="${y}" /></a>` }
+    #makeCenter() {
+        const cw = (this.width / 2)
+        const ch = (this.height / 2)
+        const size = this.userIconSizes[0]
+        const left = cw - (size / 2)
+        const top = ch - (size / 2)
+        return this.#makeUser('https://ytyaru.github.io/', './asset/image/avator.png', size, left, top)
+    }
+    #makeOuter1() {
+        const imgs = []
+        const itemNum = 8
+        const deg = 360 / itemNum
+        const start = (deg * Math.PI / 180.0)
+        const size = this.userIconSizes[1]
+        //const r = this.userIconSizes[1]
+        const r = this.userIconSizes[0]
+        //const r = this.userIconSizes[1] / 2
+        const cw = (this.width / 2)
+        const ch = (this.height / 2)
+        //const left = cw - (size / 2)
+        //const top = ch - (size / 2)
+        //const left = cw - size
+        //const top = ch - size
+        const left = cw - this.userIconSizes[0] - 16 - 16 - 8
+        const top = ch - this.userIconSizes[0] - 16 - 16 - 8
+        for (let i=0; i<itemNum; i++) {
+            //const x = Math.cos(start * i) * r + r + left;
+            //const y = Math.sin(start * i) * r + r + top;
+            const x = Math.cos(start * i - Math.PI / 2) * r + r + left;
+            const y = Math.sin(start * i - Math.PI / 2) * r + r + top;
+            console.debug(x,y)
+            imgs.push(this.#makeUser('', './asset/image/user/kkrn_icon_user_3_resize_min.svg', size, x, y))
+        }
+        return imgs.join('')
+    }
+    #makeOuter2() {
+        const imgs = []
+        const itemNum = 16
+        const deg = 360 / itemNum
+        const start = (deg * Math.PI / 180.0)
+        const size = this.userIconSizes[2]
+        //const r = this.userIconSizes[1]
+        //const r = this.userIconSizes[1]
+        //const r = (this.userIconSizes[0] + this.userIconSizes[1] + this.userIconSizes[1] ) / 2
+        //const r = (this.userIconSizes[0] + this.userIconSizes[1]) / 2 + this.userIconSizes[2]
+        //const r = (this.userIconSizes[0] / 2) + this.userIconSizes[1] + this.userIconSizes[2]
+        const r = (this.userIconSizes[0] / 2) + this.userIconSizes[1] + (this.userIconSizes[2] / 2)
+        //const r = this.userIconSizes[1] / 2
+        const cw = (this.width / 2)
+        const ch = (this.height / 2)
+        //const left = cw - (size / 2)
+        //const top = ch - (size / 2)
+        //const left = cw - size
+        //const top = ch - size
+        const left = cw - this.userIconSizes[0] - 16 - 16 - 8
+        const top = ch - this.userIconSizes[0] - 16 - 16 - 8
+        for (let i=0; i<itemNum; i++) {
+            //const x = Math.cos(start * i) * r + r + left;
+            //const y = Math.sin(start * i) * r + r + top;
+            //const x = Math.cos(start * i - Math.PI / 2) * r + r;
+            //const y = Math.sin(start * i - Math.PI / 2) * r + r;
+            //const x = Math.cos(start * i - Math.PI / 2) * r + r + left;
+            //const y = Math.sin(start * i - Math.PI / 2) * r + r + top;
+            const x = Math.cos(start * i - Math.PI / 2) * r + r + 138;
+            const y = Math.sin(start * i - Math.PI / 2) * r + r + 138;
+            console.debug(x,y)
+            imgs.push(this.#makeUser('', './asset/image/user/kkrn_icon_user_3_resize_min.svg', size, x, y))
+        }
+        return imgs.join('')
+    }
+    #makeOuter3() {
+        const imgs = []
+        const itemNum = 32
+        const deg = 360 / itemNum
+        const start = (deg * Math.PI / 180.0)
+        const size = this.userIconSizes[3]
+        const r = (this.userIconSizes[0] / 2) + this.userIconSizes[1] + this.userIconSizes[2] + (this.userIconSizes[3]/2)
+        const cw = (this.width / 2)
+        const ch = (this.height / 2)
+        const left = cw - this.userIconSizes[0] - 16 - 16 - 8
+        const top = ch - this.userIconSizes[0] - 16 - 16 - 8
+        for (let i=0; i<itemNum; i++) {
+            const x = Math.cos(start * i - Math.PI / 2) * r + r + 90;
+            const y = Math.sin(start * i - Math.PI / 2) * r + r + 90;
+            console.debug(x,y)
+            imgs.push(this.#makeUser('', './asset/image/user/kkrn_icon_user_3_resize_min.svg', size, x, y))
+        }
+        return imgs.join('')
+    }
+    #makeOuter4() {
+        const imgs = []
+        const itemNum = 48
+        const deg = 360 / itemNum
+        const start = (deg * Math.PI / 180.0)
+        const size = this.userIconSizes[4]
+        const r = (this.userIconSizes[0] / 2) + this.userIconSizes[1] + this.userIconSizes[2] + this.userIconSizes[3]  + (this.userIconSizes[4]/2)
+        const cw = (this.width / 2)
+        const ch = (this.height / 2)
+        const left = cw - this.userIconSizes[0] - 16 - 16 - 8
+        const top = ch - this.userIconSizes[0] - 16 - 16 - 8
+        for (let i=0; i<itemNum; i++) {
+            const x = Math.cos(start * i - Math.PI / 2) * r + r + 60;
+            const y = Math.sin(start * i - Math.PI / 2) * r + r + 60;
+            console.debug(x,y)
+            imgs.push(this.#makeUser('', './asset/image/user/kkrn_icon_user_3_resize_min.svg', size, x, y))
+        }
+        return imgs.join('')
+    }
+    #makeOuter5() {
+        const imgs = []
+        const itemNum = 64
+        const deg = 360 / itemNum
+        const start = (deg * Math.PI / 180.0)
+        const size = this.userIconSizes[5]
+        const r = (this.userIconSizes[0] / 2) + this.userIconSizes[1] + this.userIconSizes[2] + this.userIconSizes[3] + this.userIconSizes[4] + (this.userIconSizes[5]/2)
+        const cw = (this.width / 2)
+        const ch = (this.height / 2)
+        const left = cw - this.userIconSizes[0] - 16 - 16 - 8
+        const top = ch - this.userIconSizes[0] - 16 - 16 - 8
+        for (let i=0; i<itemNum; i++) {
+            const x = Math.cos(start * i - Math.PI / 2) * r + r + 36;
+            const y = Math.sin(start * i - Math.PI / 2) * r + r + 36;
+            console.debug(x,y)
+            imgs.push(this.#makeUser('', './asset/image/user/kkrn_icon_user_3_resize_min.svg', size, x, y))
+        }
+        return imgs.join('')
+    }
+    #makeOuter6() {
+        const imgs = []
+        const itemNum = 88
+        const deg = 360 / itemNum
+        const start = (deg * Math.PI / 180.0)
+        const size = this.userIconSizes[6]
+        //const size = 20
+        const r = (this.userIconSizes[0] / 2) + this.userIconSizes[1] + this.userIconSizes[2] + this.userIconSizes[3]  + this.userIconSizes[4] + this.userIconSizes[5] + (this.userIconSizes[6]/2)
+        const cw = (this.width / 2)
+        const ch = (this.height / 2)
+        const left = cw - this.userIconSizes[0] - 16 - 16 - 8
+        const top = ch - this.userIconSizes[0] - 16 - 16 - 8
+        for (let i=0; i<itemNum; i++) {
+            const x = Math.cos(start * i - Math.PI / 2) * r + r + 16;
+            const y = Math.sin(start * i - Math.PI / 2) * r + r + 16;
+            console.debug(x,y)
+            imgs.push(this.#makeUser('', './asset/image/user/kkrn_icon_user_3_resize_min.svg', size, x, y))
+        }
+        return imgs.join('')
+    }
+}
