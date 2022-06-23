@@ -15,13 +15,8 @@ ${this.#makeClipCss()}
     #makeClipCss() { return this.userIconSizes.map(size=>`.clip-${size}{ clip-path: circle(${size/2}px at center); }`).join('\n') }
     #makeBackground() { return `<rect x="0" y="0" width="${this.width}" height="${this.height}" style="fill:green" />` }
     #makeUsers() {
-        const imgs = Array.from({length: 6}, (v, k) => k).map(i=>this.#makeOuter(i))
-        imgs.push(this.#makeCenter())
-        return imgs.join('')
-        /*
         const imgs = []
         imgs.push(this.#makeCenter())
-        this.#makeOuter(i)
         imgs.push(this.#makeOuter1())
         imgs.push(this.#makeOuter2())
         imgs.push(this.#makeOuter3())
@@ -29,7 +24,6 @@ ${this.#makeClipCss()}
         imgs.push(this.#makeOuter5())
         imgs.push(this.#makeOuter6())
         return imgs.join('')
-        */
     }
     #makeUser(site, src, size, x, y) { return `<a href="${site}"><image href="${src}" width="${size}" height="${size}" x="${x}" y="${y}" class="clip-${size}" /></a>` }
     #makeCenter() {
@@ -39,34 +33,6 @@ ${this.#makeClipCss()}
         const left = cw - (size / 2)
         const top = ch - (size / 2)
         return this.#makeUser('https://ytyaru.github.io/', './asset/image/avator.png', size, left, top)
-    }
-    #makeOuter(i) { // i=0,1,2,3...
-        const imgs = []
-        //const itemNum = this.userIconNum[6]
-        const itemNum = this.userIconNum[i+1]
-        const deg = 360 / itemNum
-        const start = (deg * Math.PI / 180.0)
-        //const size = this.userIconSizes[6]
-        const size = this.userIconSizes[i+1]
-        //const r = (this.userIconSizes[0] / 2) + this.userIconSizes[1] + this.userIconSizes[2] + this.userIconSizes[3]  + this.userIconSizes[4] + this.userIconSizes[5] + (this.userIconSizes[6]/2)
-        const middles = this.userIconSizes.slice(1,i+1)
-        const r = ((this.userIconSizes[0]+this.userIconSizes[i+1])/2) + ((0==middles.length) ? 0 : middles.reduce((sum,v)=>sum+v))
-                  //+ this.userIconSizes.slice(1,i+1).reduce((sum,v)=>sum+v)
-                  //+ (0==middles.length) ? 0 : this.userIconSizes.slice(1,i+1).reduce((sum,v)=>sum+v)
-        console.debug(i, itemNum, size, middles,  (0==middles.length), r)
-        const cw = (this.width / 2)
-        const ch = (this.height / 2)
-        //const left = cw - ((this.userIconSizes[0]/2) + this.userIconSizes.slice(1,7).reduce((sum,v)=>sum+v))
-        //const top = ch - ((this.userIconSizes[0]/2) + this.userIconSizes.slice(1,7).reduce((sum,v)=>sum+v))
-        const left = cw - ((this.userIconSizes[0]/2) + this.userIconSizes.slice(1,i+2).reduce((sum,v)=>sum+v))
-        const top = ch - ((this.userIconSizes[0]/2) + this.userIconSizes.slice(1,i+2).reduce((sum,v)=>sum+v))
-        for (let i=0; i<itemNum; i++) {
-            const x = Math.cos(start * i - Math.PI / 2) * r + r + left;
-            const y = Math.sin(start * i - Math.PI / 2) * r + r + top;
-            console.debug(x,y)
-            imgs.push(this.#makeUser('', './asset/image/user/kkrn_icon_user_3_resize_min.svg', size, x, y))
-        }
-        return imgs.join('')
     }
     #makeOuter1() {
         const imgs = []
