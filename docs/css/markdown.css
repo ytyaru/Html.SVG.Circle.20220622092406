@@ -1,0 +1,113 @@
+@charset "utf-8";
+/*
+* {
+    padding: 0;
+    margin: 0;
+}
+body {
+    --line-of-chars:40;
+    font-size: calc(100vw / (var(--line-of-chars)));
+}
+img.icon {
+    width: 1em;
+    height: 1em;
+}
+*/
+:root { --line-of-chars:40; }
+body {
+    --font-size: calc(100vw / (var(--line-of-chars)));
+    /*font-size: calc(100vw / (var(--line-of-chars)));*/
+    font-size: var(--font-size, 16);
+    line-height: 1.75em;
+    letter-spacing: 0.0075em;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+}
+pre {
+    /*background-color: #EEEEEE;*/
+    font-size: calc(var(--font-size, 24) / 2);
+    line-height: 1.50em;
+    letter-spacing: 0.0075em;
+    padding: 0;
+}
+code {
+    background-color: #EEEEEE;
+}
+/* 画面幅960px以下 */
+@media screen and (max-width:960px) {
+  :root { --line-of-chars:30; }
+}
+/* 画面幅520px以下 */
+@media screen and (max-width:520px) {
+  :root { --line-of-chars:20; }
+}
+table, td, th {
+    border: 1px #000000 solid;
+    border-collapse: collapse;
+}
+th,td {
+    padding: 0.15em;
+}
+th { background: #FFFF88; }
+a {
+    display: inline-block;
+}
+object {
+    pointer-events: none;
+}
+.checkered-pattern {
+    background-image: linear-gradient(45deg, #808080 25%, transparent 25%), linear-gradient(-45deg, #808080 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #808080 75%), linear-gradient(-45deg, transparent 75%, #808080 75%);
+    background-size: 50px 50px;
+    background-position: 0 0, 0 25px, 25px -25px, -25px 0px;
+}
+kbd {
+    font-family: Consolas, "Lucida Console", monospace;
+    display: inline-block;
+    padding: 0.25em;
+    border-radius: 0.25em;
+    background: #eee;
+    box-shadow: 1px 1px 1px #777;
+}
+@media (prefers-color-scheme:light){
+body {
+    background-color: #fff;
+    color: #000;
+}
+kbd {
+    background: #eee;
+    color: #000;
+}
+.checkered-pattern {
+    background-image: linear-gradient(45deg, #808080 25%, transparent 25%), linear-gradient(-45deg, #808080 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #808080 75%), linear-gradient(-45deg, transparent 75%, #808080 75%);
+    background-size: 50px 50px;
+    background-position: 0 0, 0 25px, 25px -25px, -25px 0px;
+}
+}
+@media (prefers-color-scheme:dark){
+body {
+    background-color: #000;
+    color: #fff;
+}
+kbd {
+    background: #666;
+    color: #fff;
+}
+a { color: #ff0; }
+.checkered-pattern {
+    background-image: linear-gradient(45deg, #808080 25%, transparent 25%), linear-gradient(-45deg, #808080 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #808080 75%), linear-gradient(-45deg, transparent 75%, #808080 75%);
+    background-size: 50px 50px;
+    background-position: 0 0, 0 25px, 25px -25px, -25px 0px;
+    background-color: #000;
+}
+}
+.tippy-box[data-theme~="custom"] {
+  background-color: #f7f7f7;
+  color: black;
+  border: 1px solid #ededed;
+  border-radius: 0;
+}
+.tippy-arrow { background-color: #f7f7f7; }
+footer, footer iframe, footer a, footer img {
+    text-align: center;
+    vertical-align: middle;
+}

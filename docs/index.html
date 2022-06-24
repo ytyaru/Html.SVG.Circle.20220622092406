@@ -3,18 +3,19 @@
 <head prefix="og: https://ogp.me/ns# article: https://ogp.me/ns/article#">
 <meta charset="utf-8">
 <title>モナコイン取引ユーザのアイコンを円形状に並べる</title>
-<meta name="description" content="名前・アバター画像・サイトURL・紹介文を追加する">
+<meta name="description" content="どうやって座標計算するか。">
 <meta name="author" content="ytyaru">
 <link rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/deed.ja">
 <link rel="icon" href="asset/image/avator.png">
 <link rel="stylesheet" href="css/styles.css">
 <link rel="stylesheet" href="css/toot-dialog.css">
 <link rel="stylesheet" href="css/transaction.css">
+<link rel="stylesheet" href="css/markdown.css">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta property="og:type" content="profile" />
 <meta property="og:site_name" content="ytyaru" />
 <meta property="og:title" content="モナコイン取引ユーザのアイコンを円形状に並べる" />
-<meta property="og:description" content="名前・アバター画像・サイトURL・紹介文を追加する" />
+<meta property="og:description" content="どうやって座標計算するか。" />
 <meta property="og:image" content="https://ytyaru.github.io/Html.Mona.Transaction.Get.20220618094040/asset/image/eye-catch.png" />
 <meta property="article:modified_time" content="2022-06-20T16:50:00+09:00" />
 <meta property="article:published_time" content="2022-06-20T16:50:00+09:00" />
@@ -107,27 +108,46 @@
 <script src="js/mona-transaction-viewer.js"></script>
 <script src="js/circle-svg-generator.js"></script>
 <script src="js/main.js"></script>
+<script src="lib/marked/4.0.17/marked.min.js"></script>
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+<script>
+window.addEventListener('DOMContentLoaded', async(event) => {
+    //document.getElementById(`content-md`).marked.parse(await fetch(`./asset/md/0.md`))
+    const res = await fetch(`./asset/md/0.md`)
+    const md = await res.text()
+    document.getElementById(`content-md`).innerHTML = marked.parse(md)
+    hljs.highlightAll();
+});
+</script>
 </head>
 <body>
 <h1>モナコイン取引ユーザのアイコンを円形状に並べる</h1>
-<p>名前・アバター画像・サイトURL・紹介文を追加する。プロフィールは<a href="https://ytyaru.github.io/Html.GAS.Address.From.Profile.20220616091305/">mpurseのアドレスとプロフィールを登録する</a>で登録されたものを使う。なければアドレスのみ。</p>
-
 <div id="export-svg"></div>
 
 <svg width="240" height="240">
-  <style>.clip-96{clip-path: circle(96px at 50% 50%);}.clip-64{clip-path: circle(64px at 50% 50%);}</style>
   <rect x="0" y="0" width="240" height="240" style="fill:green" />
   <defs>
     <style type="text/css"><![CDATA[
-      image { clip-path: circle(50px at center); }
+      .clip-96{ clip-path: circle(48px at center); }
+      .clip-64{ clip-path: circle(32px at center); }
     ]]></style>
   </defs>
-  <a href="https://ytyaru.github.io/"><image href="./asset/image/avator.png" width="96" height="96" x="72" y="72" /></a>
-  <a href=""><image href="./asset/image/user/kkrn_icon_user_3_resize_min.svg" width="64" height="64" x="88" y="8" /></a>
-  <a href=""><image href="./asset/image/user/kkrn_icon_user_3_resize_min.svg" width="64" height="64" x="168" y="88" /></a>
-  <a href=""><image href="./asset/image/user/kkrn_icon_user_3_resize_min.svg" width="64" height="64" x="88" y="168" /></a>
-  <a href=""><image href="./asset/image/user/kkrn_icon_user_3_resize_min.svg" width="64" height="64" x="8" y="88" /></a>
+  <a href="https://ytyaru.github.io/"><image href="./asset/image/avator.png" width="96" height="96" x="72" y="72" class="clip-96" /></a>
+  <a href=""><image href="./asset/image/user/kkrn_icon_user_3_resize_min.svg" width="64" height="64" x="88" y="8" class="clip-64" /></a>
+  <a href=""><image href="./asset/image/user/kkrn_icon_user_3_resize_min.svg" width="64" height="64" x="168" y="88" class="clip-64" /></a>
+  <a href=""><image href="./asset/image/user/kkrn_icon_user_3_resize_min.svg" width="64" height="64" x="88" y="168" class="clip-64" /></a>
+  <a href=""><image href="./asset/image/user/kkrn_icon_user_3_resize_min.svg" width="64" height="64" x="8" y="88" class="clip-64" /></a>
 </svg>
+
+<h2>途中経過</h2>
+<ul>
+<li><a href="0.html">0.html</a></li>
+<li><a href="1.html">1.html</a></li>
+<li><a href="2.html">2.html</a></li>
+</ul>
+
+<main id="content-md"></main>
 
 <!--
 <input id="address" value="" placeholder="モナコインのアドレス">
