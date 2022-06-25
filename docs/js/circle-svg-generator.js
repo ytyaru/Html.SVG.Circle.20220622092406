@@ -47,8 +47,8 @@ class CircleSvgGenerator {
     }
     #calcIconNum(i) { // i:0,1,2,...  return:外周位置におけるアイコン同士が重ならない最大配置数を返す
         console.debug(i)
-        //const outerCircleSize = this.userIconSizes.slice(0,i+2).reduce((sum,v)=>sum+v) // 外１全体の直径から外１画像の中点までの距離（実際に表示すると隙間が多すぎた。外１だけはぴったり気味）
-        const outerCircleSize = ((this.userIconSizes[0]+this.userIconSizes[i+1])/2) + ((0==middles.length) ? 0 : middles.reduce((sum,v)=>sum+v))
+        const outerCircleSize = this.userIconSizes.slice(0,i+2).reduce((sum,v)=>sum+v) // 外１全体の直径から外１画像の中点までの距離（実際に表示すると隙間が多すぎた。外１だけはぴったり気味）
+        //const outerCircleSize = ((this.userIconSizes[0]+this.userIconSizes[i+1])/2) + ((0==middles.length) ? 0 : middles.reduce((sum,v)=>sum+v))
         console.debug(this.userIconSizes.slice(0,i+2))
         console.debug(outerCircleSize)
         const circumference = outerCircleSize * Math.PI // 外１全体の円周＝直径×円周率
